@@ -20,6 +20,8 @@ def main(args):
     with open(in_path, 'r', encoding='utf-8') as f_in:
         content = f_in.read()
         content = re.sub("/\\*.*?\\*/", "", content)
+        print("Parsing {:}".format(in_path))
+        print(content)
         content = json.loads(content)
 
     print('Writing file {:}'.format(out_path))
