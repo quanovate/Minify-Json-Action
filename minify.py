@@ -28,16 +28,18 @@ def main(args):
     if not os.path.isfile(in_path):
         print('{:} is not a file!'.format(in_path))
         sys.exit(1)
+    try:
+        content = None
+        print('Reading file {:}'.format(in_path))
+        with open(in_path, 'r', encoding='utf-8') as f_in:
+            content = remove_comments(f_in.read())
+            content = json.loads(content, strict=False)
     
-    content = None
-    print('Reading file {:}'.format(in_path))
-    with open(in_path, 'r', encoding='utf-8') as f_in:
-        content = remove_comments(f_in.read())
-        content = json.loads(content, strict=False)
-
-    print('Writing file {:}'.format(out_path))
-    with open(out_path, 'w', encoding='utf-8') as f_out:
-        json.dump(content, f_out, ensure_ascii=False, check_circular=False, indent=None, separators=(',', ':'))
-
+        print('Writing file {:}'.format(out_path))
+        with open(out_path, 'w', encoding='utf-8') as f_out:
+            json.dump(content, f_out, ensure_ascii=False, check_circular=False, indent=None, separators=(',', ':'))
+    except Exception as e:
+        print("Failed to parse {:}, skipping".format(in_path))
+        pass
 if __name__ == "__main__":
     main(sys.argv[1:])
