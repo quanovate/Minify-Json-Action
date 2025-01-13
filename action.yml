@@ -7,5 +7,5 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - run: find . -name "*.json" -print | xargs python ${{ github.action_path }}/minify.py
+    - run: find . -name "*.json" | xargs python ${{ github.action_path }}/minify.py
       shell: bash
