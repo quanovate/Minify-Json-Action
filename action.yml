@@ -4,19 +4,8 @@ description: 'Minify JSON files'
 branding:
   color: 'yellow'
   icon: 'minimize-2'
-inputs:
-  input_file:
-    description: 'The JSON file to minify'
-    required: true
-  output_file:
-    description: 'The path to write the minified JSON file to. Overrides the given file by default.'
-    required: false
 runs:
   using: 'composite'
   steps:
-    - run: python ${{ github.action_path }}/minify.py ${{ inputs.input_file }}
+    - run: find . -name "*.json" -print | xargs python ${{ github.action_path }}/minify.py
       shell: bash
-      if: ${{ inputs.output_file == ''}}
-    - run: python ${{ github.action_path }}/minify.py ${{ inputs.input_file }} ${{ inputs.output_file }}
-      shell: bash
-      if: ${{ inputs.output_file != ''}}
