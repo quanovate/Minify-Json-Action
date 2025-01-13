@@ -33,7 +33,7 @@ def main(args):
     print('Reading file {:}'.format(in_path))
     with open(in_path, 'r', encoding='utf-8') as f_in:
         content = remove_comments(f_in.read())
-        content = json.loads(content)
+        content = json.loads(content, strict=False)
 
     print('Writing file {:}'.format(out_path))
     with open(out_path, 'w', encoding='utf-8') as f_out:
