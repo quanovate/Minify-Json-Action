@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import re
 
 def main(args):
     if len(args) < 1:
@@ -17,6 +18,7 @@ def main(args):
     content = None
     print('Reading file {:}'.format(in_path))
     with open(in_path, 'r', encoding='utf-8') as f_in:
+        f_in = re.sub("/\\*.*?\\*/", "", f_in)
         content = json.load(f_in)
 
     print('Writing file {:}'.format(out_path))
