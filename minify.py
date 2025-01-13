@@ -18,8 +18,9 @@ def main(args):
     content = None
     print('Reading file {:}'.format(in_path))
     with open(in_path, 'r', encoding='utf-8') as f_in:
-        f_in = re.sub("/\\*.*?\\*/", "", f_in)
-        content = json.load(f_in)
+        content = f_in.read()
+        content = re.sub("/\\*.*?\\*/", "", content)
+        content = json.loads(content)
 
     print('Writing file {:}'.format(out_path))
     with open(out_path, 'w', encoding='utf-8') as f_out:
