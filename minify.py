@@ -17,7 +17,6 @@ def remove_comments(string):
             return match.group(1) # captured quoted-string
     return regex.sub(_replacer, string)
 
-
 def main(args):
     if len(args) < 1:
         print('No input file was given!')
@@ -34,8 +33,6 @@ def main(args):
     print('Reading file {:}'.format(in_path))
     with open(in_path, 'r', encoding='utf-8') as f_in:
         content = remove_comments(f_in.read())
-        print("Parsing {:}".format(in_path))
-        print(content)
         content = json.loads(content)
 
     print('Writing file {:}'.format(out_path))
